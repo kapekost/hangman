@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw=="
+          crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet"  href="css/style.css"/>
+    <title>Hangman</title>
+
+</head>
+<body onload="getNewWord(true)" onkeyup="pickCharacter(event)">
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation"><a target="_blank" href="/stats">Stats</a></li>
+                <li role="presentation" class="active"><a href="/">Game</a></li>
+
+            </ul>
+        </nav>
+        <h3 class="text-muted">Hangman</h3>
+    </div>
+
+    <div class="jumbotron">
+        <p class=" text-right"><a class="btn btn-lg btn-success" onclick="getNewWord(false)" role="button">new Word</a>
+        <div class="row">
+        <span class="label label-primary">remaining tries:
+            <div class="badge" id="remainingTries">10</div></span>
+            <br/>
+        <span class="label label-info">Score
+            <div class="badge" id="score">10</div></span>
+
+            <div class="col-xs-9"><h1 id="displayWord" style="font-family: monospace;"></h1></div>
+            <!--<div class="col-xs-4"> Nickname:-->
+            <!--<input id='nickname' type='text' value='Guest' onblur="setName()"/>-->
+            <!--</div>-->
+            <div class="col-xs-6 lead" id="pickedChars">
+            </div>
+
+        </div>
+
+        <span id="resultBadge" class="" style="display:none"></span>
+        <hr/>
+        <p class="lead">Use the keyboard to select a letter</p>
+
+        </p>
+    </div>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/communication.js"></script>
+<script src="/js/hangman.js"></script>
+</body>
+</html>

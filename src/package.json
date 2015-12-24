@@ -1,0 +1,13 @@
+{
+  "name": "hangman",
+  "version": "0.0.1",
+  "description": "Hangan web app",
+  "author": "Kostas Kapetanakis <kapekost@gmail.com>",
+  "dependencies": {
+    "express": "^4.13.3",
+    "http": "0.0.0",
+    "node-persist": "0.0.8",
+    "socket.io": "^1.3.7",
+    "websocket": "^1.0.22"
+  }
+}
