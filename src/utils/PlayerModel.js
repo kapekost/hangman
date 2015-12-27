@@ -18,9 +18,10 @@ function Player() {
             value: '',
             found: false
         }
-    }
+    };
     return this;
 }
+
 Player.prototype.toString = function () {
     return "current status: score: " + this.gameData.stats.score +
         ", active word: " + this.gameData.displayWord +
@@ -36,7 +37,7 @@ Player.prototype.updateWord = function () {
         stats: this.gameData.stats,
         displayWord: this.gameData.displayWord
     };
-}
+};
 
 Player.prototype.getNewWord = function () {
     if (this.gameData.word.value !== '') {
@@ -44,7 +45,8 @@ Player.prototype.getNewWord = function () {
         updateScore(this);
     }
 
-    var newWord = fetchWord()//"randomword.setgetgo.com", "/get.php") //online get random word free service
+    var newWord = fetchWord()//another dictionary source : "randomword.setgetgo.com", "/get.php"
+
     if (newWord == undefined) {
         this.getNewWord();
         return false;
@@ -53,45 +55,43 @@ Player.prototype.getNewWord = function () {
     while (i < this.gameData.history.length) {
         if (this.gameData.history[i].value === newWord) {
             this.getNewWord();
-
         }
         i++;
     }
     this.gameData.word = {value: newWord, found: false};
     this.gameData.stats.failedTries = [];
     this.gameData.stats.successfulTries = [];
-    console.log("will try to replace : " + this.gameData.word.value)
-    this.gameData.displayWord = this.gameData.word.value.replace(/[a-zA-Z0-9]/g, ' _ ');
-
+    this.gameData.displayWord =
+        this.gameData.word.value.replace(/[a-zA-Z0-9]/g, ' _ ');
     return {
         stats: this.gameData.stats,
         displayWord: this.gameData.displayWord
     };
-
 };
 
 Player.prototype.processCharacter = function (character) {
-    //  console.log('lowercasing: ', character, this.gameData.word.value);
     this.gameData.word.value = this.gameData.word.value.toLowerCase();
     character = character.toLowerCase();
-    //skip characters that are already used (could be applied in client
+    //skip characters that are already used (could be applied in client)
     if (!this.gameData.stats.failedTries.includes(character)
         && !(this.gameData.stats.successfulTries.includes(character))) {
-
         if (this.gameData.word.value.indexOf(character) !== -1) {
+
+            //save successful guess and populate RegEx
             this.gameData.stats.successfulTries.push(character);
             var pattern = '[^' + this.gameData.stats.successfulTries.join("|") + ']',
                 reg = new RegExp(pattern, "g");
-            this.gameData.displayWord = this.gameData.word.value.replace(reg, " _ ");
-            console.log('character found in ', this.gameData.word.value, this.gameData.displayWord);
+            this.gameData.displayWord =
+                this.gameData.word.value.replace(reg, " _ ");
+
+            //check if it was the winning guess
             if (this.gameData.word.value === this.gameData.displayWord) {
-                console.log('WON!!!!');
                 updateScore(this);
                 this.gameData.word.found = true;
             }
             return true;
         } else {
-            console.log('character not found in ', this.gameData.word.value);
+            //save to wrong guesses
             this.gameData.stats.failedTries.push(character);
             return false;
         }
@@ -107,7 +107,10 @@ function updateScore(player) {
         if (score < 0) score = 0;
     }
 }
+
 function fetchWord() {
+    //dictionary was async populated with some words,
+    //get one word and a new will replace the one we took
     if (dictionary.data.store.length > 0) {
         var indexToSelect = Math.floor((Math.random() * dictionary.data.store.length));
         var returnWord = dictionary.data.store[indexToSelect];
@@ -119,15 +122,16 @@ function fetchWord() {
         return false;
     }
 }
+
+//make history array printable for toString() replacement
 function stringifyHistory(historyEntries) {
-    var historyString='';
+    var historyString = '';
     historyEntries.map(makeString);
     function makeString(history) {
-        var wordStatus = (history.found==true)?'found':'missed';
-        historyString += '['+history.value + ' : ' + wordStatus + '] ';
+        var wordStatus = (history.found == true) ? 'found' : 'missed';
+        historyString += '[' + history.value + ' : ' + wordStatus + '] ';
     }
+
     return historyString;
 }
-
-
 module.exports = Player;

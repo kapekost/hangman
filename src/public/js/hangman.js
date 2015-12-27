@@ -31,7 +31,6 @@ socket.on('lostWord', function (word) {
 });
 socket.on('status', function (playerData) {
     updateFields(playerData);
-    console.log('status', playerData);
 });
 
 //emitters
@@ -66,8 +65,8 @@ function updateBadge(innerTextValue, labelTypeName) {
     updateAttr('resultBadge', 'class', 'label label-' + labelTypeName);
     updateAttr('resultBadge', 'style', 'display:block');
 }
-function updateFields(playerData) {
 
+function updateFields(playerData) {
     updateHTML('pickedChars', playerData.stats.failedTries);
     updateHTML('remainingTries', 10 - playerData.stats.failedTries.length);
     updateHTML('score', playerData.stats.score);
@@ -76,6 +75,7 @@ function updateFields(playerData) {
 function updateHTML(elementName, value) {
     document.getElementById(elementName).innerHTML = value;
 }
+
 function updateAttr(elementName, attr, value) {
     document.getElementById(elementName).setAttribute(attr, value);
 }

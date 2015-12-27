@@ -1,7 +1,7 @@
 /*
  client stats -page logic
  */
-socket.emit('updateStats');//notify server: reload
+socket.emit('updateStats');
 socket.on('updateStats', displayActiveUsers);
 
 var outputDOM = document.getElementById('connectedUsers');
@@ -44,24 +44,24 @@ function createUserLineHTML(player) {
     lineDiv.appendChild(document.createElement('hr'));
 
     function updateHistory(word) {
-        addNodeInfo(word.value,word.found,true);
+        addNodeInfo(word.value, word.found, true);
     }
 
-    function addNodeInfo(label, value,isHistory) {
+    function addNodeInfo(label, value, isHistory) {
         //if not history add the label field
-        if(!isHistory) {
+        if (!isHistory) {
             addSpan('primary')
             SpanElem.innerHTML = label;
             lineDiv.appendChild(SpanElem);
         }
         //if history, change label color to represent the skipped value field
-        (isHistory) ?   addSpan(getGreenRed(value)) : addSpan('warning');
+        (isHistory) ? addSpan(getGreenRed(value)) : addSpan('warning');
         SpanElem.innerHTML = (isHistory) ? label : value;
         SpanElem.appendChild(document.createElement('br'));
         lineDiv.appendChild(SpanElem);
         //get color for history value field (true false)
-        function getGreenRed(value){
-            return (value) ?  'success':'danger';
+        function getGreenRed(value) {
+            return (value) ? 'success' : 'danger';
         }
     }
 
@@ -71,6 +71,5 @@ function createUserLineHTML(player) {
         SpanElem.setAttribute('role', 'alert');
     }
 
-    //  lineDiv.innerHTML = player.details + '<hr/>';
     return lineDiv;
 }

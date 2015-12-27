@@ -17,6 +17,8 @@ function Words() {
         index++;
     }, 500);
 }
+//alternative source
+//TODO: To be added in fail callbacks
 //host: "randomword.setgetgo.com",
 //path: "/get.php"
 function fetchWord(singlecall, index) {
@@ -25,23 +27,17 @@ function fetchWord(singlecall, index) {
             host: "creativitygames.net",
             path: "/random-word-generator/singleword/"
         }, function (response) {
-            // Continuously update stream with data
             var body = '';
             response.on('data', function (d) {
                 body += d;
             });
             response.on('end', function () {
-                //console.log(body);
                 //small hack for the data we get from the second url
                 body = body.substring(body.indexOf('>') + 1, body.length);
                 if ((body && singlecall) || body && (!singlecall && index < maxWords)) {
                     (singlecall) ? store.push(body) : store[index] = body;
-                    //console.log('updating dictionary', body, singlecall);
-                } else {
-                    //console.log('nobody');
                 }
-
-            })
+            });
             response.on('error', function (error) {
                 console.log('resp error: ', error);
             });
@@ -49,7 +45,7 @@ function fetchWord(singlecall, index) {
     } catch (ex) {
         console.log(ex);
     }
-};
+}
 module.exports.Words = Words;
 module.exports.fetchNewWord = fetchNewWord;
 module.exports.data = {

@@ -1,18 +1,15 @@
 /*
-general helper array extending classes for Javascript
-compatibility and convenience (conforms to future releases)
+ general helper array extending classes for Javascript
+ compatibility and convenience (conforms to future releases)
  */
 function compatibleArrays() {
     if (!Array.prototype.map) {
         Array.prototype.map = function (fun) {
             var len = this.length;
-
             if (typeof fun != "function")
                 throw new TypeError();
-
             var res = new Array(len);
             var thisp = arguments[1];
-
             for (var i = 0; i < len; i++) {
                 if (i in this)
                     res[i] = fun.call(thisp, this[i], i, this);
@@ -21,7 +18,7 @@ function compatibleArrays() {
         };
     }
     if (!Array.prototype.includes) {
-        Array.prototype.includes = function(searchElement /*, fromIndex*/ ) {
+        Array.prototype.includes = function (searchElement /*, fromIndex*/) {
             'use strict';
             var O = Object(this);
             var len = parseInt(O.length) || 0;

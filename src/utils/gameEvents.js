@@ -13,8 +13,11 @@ function attachGameListeners(io, player, players) {
 
 
     function getNewWord(isRefresh) {
-        player.socket.emit('getNewWord', (isRefresh.value) ? player.updateWord() : player.getNewWord());
-        storage.setItem(player.GUID,player.gameData);
+        player.socket.emit('getNewWord',
+            (isRefresh.value)
+                ? player.updateWord()
+                : player.getNewWord());
+        storage.setItem(player.GUID, player.gameData);
         return statsEvents.updateStats(io, players);
     }
 
@@ -41,14 +44,13 @@ function attachGameListeners(io, player, players) {
     }
 
     function updateWord() {
-        //should be the same, rename to updateWorld and merge
+        //TODO: should be merged
         player.socket.emit('updateWord', player.updateWord());
         player.socket.emit('status',
             {
                 stats: player.gameData.stats
             });
-        storage.setItem(player.GUID,player.gameData);
-
+        storage.setItem(player.GUID, player.gameData);
         return statsEvents.updateStats(io, players);
     }
 }
