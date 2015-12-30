@@ -55,9 +55,6 @@ function register(connection) {
         statEvents.updateStats(io, players);
         return;
     }
-    // save the new connection in a holding area
-    //remove this if  the client rejects the new GUID and delivers a persisted one
-    players.push(player);
     player.socket = connection;
     player.GUID = assets.createGUID();
     player.socket.emit('register', {GUID: player.GUID});

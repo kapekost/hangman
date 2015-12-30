@@ -20,6 +20,15 @@ function attachConnectionListeners(io, player, players, disconnectedPlayers) {
             //add an additional date object to make a retention policy for those who left
             player.gameData = storage.getItem(player.GUID);
         }
+        //avoid duplicate for ready to ping-time-out sockets
+        players.map(
+            function (playerToRestore) {
+                if (playerToRestore.GUID === player.GUID) {
+                    players.splice(players.indexOf(player), 1);
+                }
+            }
+        );
+        players.push(player);
         disconnectedPlayers.map(function (disconnectedPlayer) {
             if (disconnectedPlayer.GUID === player.GUID) {
                 player.socket.emit('register', {GUID: player.GUID});
