@@ -32,7 +32,7 @@ function attachGameListeners(io, player, players) {
             return true;
         }
 
-        if (player.gameData.stats.failedTries.length == 10) {
+        if (player.gameData.stats.failedTries.length == player.gameData.totalTries) {
             player.socket.emit('lostWord', player.gameData.word.value);
             player.gameData.displayWord = player.gameData.word.value;
         }

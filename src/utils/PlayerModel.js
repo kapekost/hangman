@@ -5,8 +5,10 @@
  */
 var dictionary = require('./dictionaryService.js');
 dictionary.Words();
+
 function Player() {
     this.gameData = {
+        totalTries:10,
         stats: {
             score: 0,
             failedTries: [],
@@ -35,7 +37,8 @@ Player.prototype.updateWord = function () {
 
     return {
         stats: this.gameData.stats,
-        displayWord: this.gameData.displayWord
+        displayWord: this.gameData.displayWord,
+        totalTries: this.gameData.totalTries
     };
 };
 
@@ -65,7 +68,8 @@ Player.prototype.getNewWord = function () {
         this.gameData.word.value.replace(/[a-zA-Z0-9]/g, ' _ ');
     return {
         stats: this.gameData.stats,
-        displayWord: this.gameData.displayWord
+        displayWord: this.gameData.displayWord,
+        totalTries: this.gameData.totalTries
     };
 };
 
@@ -74,7 +78,8 @@ Player.prototype.processCharacter = function (character) {
     character = character.toLowerCase();
     //skip characters that are already used (could be applied in client)
     if (!this.gameData.stats.failedTries.includes(character)
-        && !(this.gameData.stats.successfulTries.includes(character))) {
+        && !(this.gameData.stats.successfulTries.includes(character))
+    && this.gameData.totalTries > this.gameData.stats.failedTries.length) {
         if (this.gameData.word.value.indexOf(character) !== -1) {
 
             //save successful guess and populate RegEx

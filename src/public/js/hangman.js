@@ -4,15 +4,13 @@
 //local variables
 var freeze = false;
 var remainingTries;
+var totalTries;
 //receivers
 socket.on('updateWord', function (playerData) {
-    freeze = false;
-    updateHTML('displayWord', playerData.displayWord);
+    refreshWordAndCounts(playerData);
 });
 socket.on('getNewWord', function (playerData) {
-    freeze = false;
-    updateHTML('displayWord', playerData.displayWord);
-    remainingTries = 10 - playerData.stats.failedTries.length;
+    refreshWordAndCounts(playerData);
     updateAttr('resultBadge', 'style', 'display:none');
 
     if (remainingTries <= 0) {
@@ -30,6 +28,7 @@ socket.on('lostWord', function (word) {
     updateBadge('Fail', 'danger');
 });
 socket.on('status', function (playerData) {
+    remainingTries = totalTries - playerData.stats.failedTries.length;
     updateFields(playerData);
 });
 
@@ -68,7 +67,7 @@ function updateBadge(innerTextValue, labelTypeName) {
 
 function updateFields(playerData) {
     updateHTML('pickedChars', playerData.stats.failedTries);
-    updateHTML('remainingTries', 10 - playerData.stats.failedTries.length);
+    updateHTML('remainingTries', remainingTries);
     updateHTML('score', playerData.stats.score);
 }
 
@@ -78,4 +77,10 @@ function updateHTML(elementName, value) {
 
 function updateAttr(elementName, attr, value) {
     document.getElementById(elementName).setAttribute(attr, value);
+}
+function refreshWordAndCounts(playerData) {
+    freeze = false;
+    totalTries = playerData.totalTries;
+    remainingTries = playerData.totalTries - playerData.stats.failedTries.length;
+    updateHTML('displayWord', playerData.displayWord);
 }
