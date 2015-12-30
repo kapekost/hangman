@@ -17,5 +17,6 @@ function connect() {
 function register(player) {
     if (!sessionStorage.GUID && player.GUID) {
         sessionStorage.GUID = player.GUID;
+        socket.emit('registerGUID');
     }
 }

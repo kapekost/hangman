@@ -6,14 +6,19 @@ var assets = require('./statisticsEvents.js');
 var storage = require('node-persist');
 
 function attachConnectionListeners(io, player, players, disconnectedPlayers) {
+    player.socket.on('registerGUID', registerGUID);
     player.socket.on('updateStats', updateStats);
     player.socket.on('restoreGUID', restoreGUID);
     player.socket.on('disconnect', disconnect);
 
+
     function updateStats() {
         return assets.updateStats(io, players);
     }
-
+    function registerGUID(){
+        players.push(player);
+        return assets.updateStats(io, players);
+    }
     function restoreGUID(restoreGUID) {
         player.GUID = restoreGUID.GUID;
         if (storage.getItem(player.GUID)) {
