@@ -69,7 +69,7 @@ function updateFields(playerData) {
     updateHTML('pickedChars', playerData.stats.failedTries);
     updateHTML('remainingTries', remainingTries);
     updateHTML('score', playerData.stats.score);
-    updateGraphic(noOfFailedTries, totalTries);
+    updateGraphic(playerData.stats.failedTries.length, totalTries);
 }
 
 function updateHTML(elementName, value) {
@@ -80,10 +80,10 @@ function updateAttr(elementName, attr, value) {
     document.getElementById(elementName).setAttribute(attr, value);
 }
 function refreshWordAndCounts(playerData) {
-    var noOfFailedTries = playerData.stats.failedTries.length;
+
     freeze = false;
     totalTries = playerData.totalTries;
-    remainingTries = playerData.totalTries - noOfFailedTries;
+    remainingTries = playerData.totalTries - playerData.stats.failedTries.length;
     updateHTML('displayWord', playerData.displayWord);
 }
 function updateGraphic(noOfFailedTries, totalTries) {
@@ -91,12 +91,9 @@ function updateGraphic(noOfFailedTries, totalTries) {
     var elemnum = Math.round((noOfFailedTries / totalTries) * svgElements.childElementCount);
     var i = 0;
     while (i < svgElements.childElementCount) {
-        if (i < elemnum) {
-            svgElements.children[i].setAttribute('style', 'display:block');
-        }
-        else {
-            svgElements.children[i].setAttribute('style', 'display:none');
-        }
+        var display;
+        display = (i < elemnum) ?  "block" : "none";
+        svgElements.children[i].setAttribute('style', 'display:' + display);
         i++;
     }
 }
