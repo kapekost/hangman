@@ -1,6 +1,3 @@
-
-# README #
-
 ### HANGMAN ###
 
 * HANGMAN browser game
@@ -26,3 +23,5 @@ $ node server.js
 ### Author ###
 
 * Kostas Kapetanakis
+
+![2015-12-31 00_25_49-Start.png](https://bitbucket.org/repo/y6Rzgo/images/3009464578-2015-12-31%2000_25_49-Start.png)
