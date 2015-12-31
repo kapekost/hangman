@@ -88,6 +88,7 @@ function refreshWordAndCounts(playerData) {
 }
 function updateGraphic(noOfFailedTries, totalTries) {
     var svgElements = document.getElementsByTagName('g')[0];
+    svgElements.setAttribute('style', 'display:block');
     var elemnum = Math.round((noOfFailedTries / totalTries) * svgElements.childElementCount);
     var i = 0;
     while (i < svgElements.childElementCount) {
