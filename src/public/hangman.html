@@ -13,25 +13,25 @@
 </head>
 <body onload="getNewWord(true)" onkeyup="pickCharacter(event)">
 <div class="container">
-    <div class="header clearfix">
-        <nav>
-            <ul class="nav nav-pills pull-right">
-                <li role="presentation"><a target="_blank" href="/stats">Stats</a></li>
-                <li role="presentation" class="active"><a href="/">Game</a></li>
-
-            </ul>
-        </nav>
-        <h3 class="text-muted">Hangman</h3>
-    </div>
 
     <div class="jumbotron">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation"><a target="_blank" href="/stats">Stats</a></li>
+                    <li role="presentation" class="active"><a href="/">Reload</a></li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">Hangman</h3>
+        </div>
+
         <p class=" text-left"><a class="btn btn-lg btn-success" onclick="getNewWord(false)" role="button">new Word</a>
         <div class="row">
         <span class="label label-primary">remaining tries:
-            <div class="badge" id="remainingTries">10</div></span>
+            <div class="badge" id="remainingTries"></div></span>
 
         <span class="label label-info">Score
-            <div class="badge" id="score">10</div></span>
+            <div class="badge" id="score"></div></span>
 
             <div class="col-xs-9"><h1 id="displayWord" style="font-family: monospace;"></h1></div>
             <!--<div class="col-xs-4"> Nickname:-->
@@ -42,6 +42,23 @@
 
         </div>
 
+
+        <svg width="580" height="400" xmlns="http://www.w3.org/2000/svg">
+            <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+            <g>
+                <ellipse style="display:none" ry="24" rx="52.5" id="svg_5" cy="332" cx="270.5" stroke-width="5" stroke="#000" fill="#4c261d"/>
+                <line style="display:none" stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_6" y2="38" x2="271" y1="331" x1="272" stroke-width="5" fill="none"/>
+                <line style="display:none" stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_8" y2="39" x2="474.99999" y1="39" x1="270" fill-opacity="null" stroke-opacity="null" stroke-width="5" fill="none"/>
+                <line style="display:none" stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_16" y2="40" x2="341" y1="151" x1="271" fill-opacity="null" stroke-opacity="null" stroke-width="5" fill="none"/>
+                <ellipse style="display:none" ry="40.5" rx="43.5" id="svg_9" cy="83.5" cx="468.5" fill-opacity="null" stroke-opacity="null" stroke-width="5" stroke="#000" fill="none"/>
+                <line style="display:none" stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_11" y2="205" x2="468" y1="123" x1="467" fill-opacity="null" stroke-opacity="null" stroke-width="5" fill="none"/>
+                <line style="display:none" stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_12" y2="206" x2="471" y1="160" x1="415" fill-opacity="null" stroke-opacity="null" stroke-width="5" fill="none"/>
+                <line style="display:none" stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_13" y2="202" x2="470" y1="168" x1="524" fill-opacity="null" stroke-opacity="null" stroke-width="5" fill="none"/>
+                <line style="display:none" stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_14" y2="205" x2="467" y1="292" x1="448" fill-opacity="null" stroke-opacity="null" stroke-width="5" fill="none"/>
+                <line style="display:none" stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_15" y2="202" x2="468" y1="294" x1="490" fill-opacity="null" stroke-opacity="null" stroke-width="5" fill="none"/>
+            </g>
+        </svg>
         <span id="resultBadge" class="" style="display:none"></span>
         <hr/>
         <p class="lead">Use the keyboard to select a letter, press <strong>enter</strong> for new word</p>
