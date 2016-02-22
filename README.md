@@ -7,10 +7,10 @@
 
 >Hangman game.
 
--maintain data after server/client reload
--send SMS
--P2P browser communication
--global statistics page
+* maintain data after server/client reload
+* send SMS
+* P2P browser communication
+* global statistics page
 
 - HTML5
 - JavaScript
