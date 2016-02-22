@@ -10,6 +10,7 @@ var assets = require('./utils/assetsService.js'); //various useful functions
 var gameEvents = require('./utils/gameEvents.js');
 var networkEvents = require('./utils/networkEvents.js');
 var statEvents = require('./utils/statisticsEvents.js');
+var nexmo = require('./utils/nexmo.js');
 var storage = require('node-persist');
 var express = require('express');
 var parseurl = require('parseurl');
@@ -63,4 +64,5 @@ function register(connection) {
     //core modules
     gameEvents(io, player, players);
     networkEvents(io, player, players, disconnectedPlayers);
+    nexmo(player);
 }

@@ -5,6 +5,7 @@
 var freeze = false;
 var remainingTries;
 var totalTries;
+var stoppedInput = false;
 //receivers
 socket.on('updateWord', function (playerData) {
     refreshWordAndCounts(playerData);
@@ -38,25 +39,42 @@ function getNewWord(isRefresh) {
     if (!sessionStorage.GUID) {
         isRefresh = false;
     }
-    socket.emit('getNewWord', {value: isRefresh});
+    socket.emit('getNewWord', {
+        value: isRefresh
+    });
+}
+
+function sendCheat() {
+
+    socket.emit('sendCheat', {
+        value: document.getElementById('phoneNumber').value
+    });
 }
 
 function pickCharacter(event) {
-    //small convenient hook for 'enter' to change word
-    if (event.which == 13) {
-        getNewWord(false);
-    }
-    if (
-        ((event.which <= 90
-        && event.which >= 48) //characters and numbers
-        || event.which == 32) //space
-        && !freeze) {
-        socket.emit('pickCharacter',
-            String.fromCharCode(event.keyCode));
+    if (!stoppedInput) {
+        //small convenient hook for 'enter' to change word
+        if (event.which == 13) {
+            getNewWord(false);
+        }
+        if (
+            ((event.which <= 90 && event.which >= 48) //characters and numbers
+                || event.which == 32) //space
+            && !freeze) {
+            socket.emit('pickCharacter',
+                String.fromCharCode(event.keyCode));
+        }
     }
 }
 
+// UI
+function stopInput() {
+    stoppedInput = true;
+}
 
+function startInput() {
+    stoppedInput = false;
+}
 //helpers
 
 function updateBadge(innerTextValue, labelTypeName) {
@@ -79,6 +97,7 @@ function updateHTML(elementName, value) {
 function updateAttr(elementName, attr, value) {
     document.getElementById(elementName).setAttribute(attr, value);
 }
+
 function refreshWordAndCounts(playerData) {
 
     freeze = false;
@@ -86,6 +105,7 @@ function refreshWordAndCounts(playerData) {
     remainingTries = playerData.totalTries - playerData.stats.failedTries.length;
     updateHTML('displayWord', playerData.displayWord);
 }
+
 function updateGraphic(noOfFailedTries, totalTries) {
     var svgElements = document.getElementsByTagName('g')[0];
     svgElements.setAttribute('style', 'display:block');
@@ -93,7 +113,7 @@ function updateGraphic(noOfFailedTries, totalTries) {
     var i = 0;
     while (i < svgElements.childElementCount) {
         var display;
-        display = (i < elemnum) ?  "block" : "none";
+        display = (i < elemnum) ? "block" : "none";
         svgElements.children[i].setAttribute('style', 'display:' + display);
         i++;
     }
