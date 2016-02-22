@@ -8,7 +8,7 @@
 >Hangman game.
 
 -maintain data after server/client reload
--send SMS 
+-send SMS
 -P2P browser communication
 -global statistics page
 
