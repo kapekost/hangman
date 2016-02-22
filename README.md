@@ -1,16 +1,22 @@
 ### HANGMAN ###
 
 * HANGMAN browser game
-* 0.0.1
+* 0.0.2
 
 ### About ###
 
 >Hangman game.
 
+maintain data after server/client reload
+send SMS 
+P2P browser communication
+global statistics page
+
 - HTML5
 - JavaScript
 - NodeJS
 - Bootstrap
+- SMS NEXMO API
 
 ### Set up ###
 ```sh
