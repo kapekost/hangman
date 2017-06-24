@@ -27,8 +27,10 @@ $ node server.js
 ```
 * point a browser (chrome) to http://localhost:8080
 
-### Author ###
-
-* Kostas Kapetanakis
-
+### Enable SMS functionality ###
+*set the variables 
+```javascript
+    var API_KEY = 'API_KEY';
+    var API_SECRET = 'API_SECRET';
+```
 ![2015-12-31 00_25_49-Start.png](https://bitbucket.org/repo/y6Rzgo/images/3009464578-2015-12-31%2000_25_49-Start.png)
