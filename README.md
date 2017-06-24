@@ -28,7 +28,7 @@ $ node server.js
 * point a browser (chrome) to http://localhost:8080
 
 ### Enable SMS functionality ###
-* set the variables 
+* set the variables in src/utils/nexmo.js
 ```javascript
     var API_KEY = 'API_KEY';
     var API_SECRET = 'API_SECRET';
