@@ -18,7 +18,7 @@ var parseurl = require('parseurl');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 var pathname;
 var players = [];
 var disconnectedPlayers = [];
@@ -33,20 +33,20 @@ storage.initSync({
 
 io.on('connection', register);
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     pathname = parseurl(req).pathname;
     next()
 });
 
-http.listen(PORT, function () {
+http.listen(PORT, function() {
     console.log('HANGMAN\'s server listening on *:%s', PORT);
 });
 
 app.use(express.static('public'));
-app.get('/', function (req, res) {
+app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/hangman.html');
 });
-app.get('/stats', function (req, res) {
+app.get('/stats', function(req, res) {
     res.sendFile(__dirname + '/public/stats.html');
 });
 
@@ -58,7 +58,7 @@ function register(connection) {
     }
     player.socket = connection;
     player.GUID = assets.createGUID();
-    player.socket.emit('register', {GUID: player.GUID});
+    player.socket.emit('register', { GUID: player.GUID });
 
     //set up the Hangman modules for the new player object
     //core modules

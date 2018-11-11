@@ -1,18 +1,18 @@
 {
   "name": "hangman",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Hangan web app",
   "author": "Kostas Kapetanakis <kapekost@gmail.com>",
   "dependencies": {
-    "express": "^4.13.3",
+    "express": "^4.16.4",
     "http": "0.0.0",
     "node-persist": "0.0.8",
-    "parseurl": "^1.3.0",
-    "socket.io": "^1.3.7",
+    "parseurl": "^1.3.2",
+    "socket.io": "^1.7.4",
     "websocket": "^1.0.22"
   },
   "scripts": {
-  "start": "node server.js"
-},
-"main": "server.js"
+    "start": "node src/server.js"
+  },
+  "main": "server.js"
 }

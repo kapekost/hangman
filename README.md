@@ -1,7 +1,7 @@
 ### HANGMAN ###
 
 * HANGMAN browser game
-* 0.0.2
+* 0.0.3
 
 ### About ###
 
@@ -27,7 +27,7 @@ $ node server.js
 ```
 * point a browser (chrome) to http://localhost:8080
 
-### Enable SMS functionality ###
+### Enable SMS (nexmo) functionality ###
 * set the variables in src/utils/nexmo.js
 ```javascript
     var API_KEY = 'API_KEY';
