@@ -43,12 +43,7 @@ http.listen(PORT, function() {
 });
 
 app.use(express.static('public'));
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/public/hangman.html');
-});
-app.get('/stats', function(req, res) {
-    res.sendFile(__dirname + '/public/stats.html');
-});
+app.get('/', express.static('public'));
 
 function register(connection) {
     var player = new Player;
