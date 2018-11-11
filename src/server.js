@@ -42,8 +42,7 @@ http.listen(PORT, function() {
     console.log('HANGMAN\'s server listening on *:%s', PORT);
 });
 
-app.use(express.static('public'));
-app.get('/', express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 function register(connection) {
     var player = new Player;

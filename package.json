@@ -14,5 +14,5 @@
   "scripts": {
     "start": "node src/server.js"
   },
-  "main": "server.js"
+  "main": "src/server.js"
 }
