@@ -1,7 +1,7 @@
 /*
  client Hangman -page script
  */
-//local variables
+//init setup
 var freeze = false;
 var remainingTries;
 var totalTries;
