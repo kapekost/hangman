@@ -17,15 +17,15 @@ function Words() {
         index++;
     }, 500);
 }
-//alternative source
-//TODO: To be added in fail callbacks
-//host: "randomword.setgetgo.com",
-//path: "/get.php"
+
 function fetchWord(singlecall, index) {
     try {
         http.get({
-            host: "creativitygames.net",
-            path: "/random-word-generator/singleword/"
+            host: "random-word-api.herokuapp.com",
+            path: "/word/",
+            headers: {
+                "content-type": "application/json"
+            }
         }, function (response) {
             var body = '';
             response.on('data', function (d) {
@@ -33,7 +33,8 @@ function fetchWord(singlecall, index) {
             });
             response.on('end', function () {
                 //small hack for the data we get from the second url
-                body = body.substring(body.indexOf('>') + 1, body.length);
+                console.log('body: ', store);
+                body = body.substring(body.indexOf('["') + 2, body.indexOf('"]'));
                 if ((body && singlecall) || body && (!singlecall && index < maxWords)) {
                     (singlecall) ? store.push(body) : store[index] = body;
                 }
