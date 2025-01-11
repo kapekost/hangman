@@ -32,8 +32,6 @@ function fetchWord(singlecall, index) {
                 body += d;
             });
             response.on('end', function () {
-                //small hack for the data we get from the second url
-                console.log('body: ', store);
                 body = body.substring(body.indexOf('["') + 2, body.indexOf('"]'));
                 if ((body && singlecall) || body && (!singlecall && index < maxWords)) {
                     (singlecall) ? store.push(body) : store[index] = body;
