@@ -4,12 +4,12 @@
   "description": "Hangan web app",
   "author": "Kostas Kapetanakis <kapekost@gmail.com>",
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.21.2",
     "http": "0.0.0",
-    "node-persist": "0.0.8",
-    "parseurl": "^1.3.2",
-    "socket.io": "^1.7.4",
-    "websocket": "^1.0.22"
+    "node-persist": "^0.0.8",
+    "parseurl": "^1.3.3",
+    "socket.io": "^4.8.1",
+    "websocket": "^1.0.35"
   },
   "scripts": {
     "start": "node src/server.js"
